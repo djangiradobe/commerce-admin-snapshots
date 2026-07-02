@@ -23,6 +23,9 @@ const SCHEMA_DOC_ID = 'v1'
 const SNAPSHOT_COLLECTION = 'system_config_snapshots'
 const SNAPSHOT_MAX = 100
 
+// Per-cold-start guard so we createIndex at most once per container.
+let snapIndexEnsured = false
+
 async function ensureCollection (client, name) {
   try { await client.createCollection(name) } catch (err) {
     const msg = (err && err.message) ? String(err.message) : String(err)
@@ -63,6 +66,10 @@ async function main (params) {
 
   try {
     await ensureCollection(client, SNAPSHOT_COLLECTION)
+    const snapColForIndex = await client.collection(SNAPSHOT_COLLECTION)
+    if (!snapIndexEnsured) {
+      try { await snapColForIndex.createIndex({ createdAt: -1 }); snapIndexEnsured = true } catch (_) { /* best-effort */ }
+    }
     const dataCol = await client.collection(DATA_COLLECTION)
     const schemaCol = await client.collection(SCHEMA_COLLECTION)
     const snapCol = await client.collection(SNAPSHOT_COLLECTION)

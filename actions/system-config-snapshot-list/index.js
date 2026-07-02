@@ -13,6 +13,9 @@ const { getClient } = require('@adobedjangir/commerce-admin-management/abdb')
 
 const SNAPSHOT_COLLECTION = 'system_config_snapshots'
 
+// Per-cold-start guard so we createIndex at most once per container.
+let snapIndexEnsured = false
+
 async function main (params) {
   const logger = Core.Logger('system-config-snapshot-list', { level: params.LOG_LEVEL || 'info' })
   const limit = Math.min(Math.max(parseInt(params.limit, 10) || 50, 1), 500)
@@ -26,6 +29,9 @@ async function main (params) {
 
   try {
     const col = await client.collection(SNAPSHOT_COLLECTION)
+    if (!snapIndexEnsured) {
+      try { await col.createIndex({ createdAt: -1 }); snapIndexEnsured = true } catch (_) { /* best-effort */ }
+    }
     const docs = await col.find({}).sort({ createdAt: -1 }).skip(skip).limit(limit).toArray().catch(() => [])
     // Strip large payloads from the list response.
     const items = docs.map((d) => ({

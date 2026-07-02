@@ -11,7 +11,8 @@ export default function registerSnapshots () {
     actionKeys: {
       systemConfigSnapshotCreate:  'Snapshots/system-config-snapshot-create',
       systemConfigSnapshotList:    'Snapshots/system-config-snapshot-list',
-      systemConfigSnapshotRestore: 'Snapshots/system-config-snapshot-restore'
+      systemConfigSnapshotRestore: 'Snapshots/system-config-snapshot-restore',
+      systemConfigSnapshotDelete:  'Snapshots/system-config-snapshot-delete'
     },
     extraNav: [{
       id: 'snapshots',

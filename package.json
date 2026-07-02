@@ -1,6 +1,6 @@
 {
   "name": "@adobedjangir/commerce-admin-snapshots",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Snapshot + rollback add-on for @adobedjangir/commerce-admin-management. Capture point-in-time copies of schema + values, restore wholesale (auto pre-restore backup included).",
   "license": "Apache-2.0",
   "author": "Adobe Inc.",

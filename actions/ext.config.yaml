@@ -1,0 +1,53 @@
+# Action fragment for the snapshots add-on. $included by app.config.yaml
+# under application.runtimeManifest.packages.Snapshots.
+license: Apache-2.0
+actions:
+  system-config-snapshot-create:
+    function: system-config-snapshot-create/index.js
+    web: 'yes'
+    runtime: 'nodejs:20'
+    inputs:
+      LOG_LEVEL: debug
+      OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID
+      OAUTH_CLIENT_SECRET: $OAUTH_CLIENT_SECRET
+      OAUTH_ORG_ID: $OAUTH_ORG_ID
+      OAUTH_SCOPES: $OAUTH_SCOPES
+      AIO_DB_REGION: $AIO_DB_REGION
+      SUPER_ADMIN_EMAILS: $SUPER_ADMIN_EMAILS
+    annotations:
+      require-adobe-auth: false
+      include-ims-credentials: true
+      final: true
+  system-config-snapshot-list:
+    function: system-config-snapshot-list/index.js
+    web: 'yes'
+    runtime: 'nodejs:20'
+    inputs:
+      LOG_LEVEL: debug
+      OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID
+      OAUTH_CLIENT_SECRET: $OAUTH_CLIENT_SECRET
+      OAUTH_ORG_ID: $OAUTH_ORG_ID
+      OAUTH_SCOPES: $OAUTH_SCOPES
+      AIO_DB_REGION: $AIO_DB_REGION
+      SUPER_ADMIN_EMAILS: $SUPER_ADMIN_EMAILS
+    annotations:
+      require-adobe-auth: false
+      include-ims-credentials: true
+      final: true
+  system-config-snapshot-restore:
+    function: system-config-snapshot-restore/index.js
+    web: 'yes'
+    runtime: 'nodejs:20'
+    inputs:
+      LOG_LEVEL: debug
+      SYSTEM_CONFIG_CRYPT_KEY: $SYSTEM_CONFIG_CRYPT_KEY
+      OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID
+      OAUTH_CLIENT_SECRET: $OAUTH_CLIENT_SECRET
+      OAUTH_ORG_ID: $OAUTH_ORG_ID
+      OAUTH_SCOPES: $OAUTH_SCOPES
+      AIO_DB_REGION: $AIO_DB_REGION
+      SUPER_ADMIN_EMAILS: $SUPER_ADMIN_EMAILS
+    annotations:
+      require-adobe-auth: false
+      include-ims-credentials: true
+      final: true

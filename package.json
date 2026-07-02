@@ -1,0 +1,45 @@
+{
+  "name": "@adobedjangir/commerce-admin-snapshots",
+  "version": "1.0.1",
+  "description": "Snapshot + rollback add-on for @adobedjangir/commerce-admin-management. Capture point-in-time copies of schema + values, restore wholesale (auto pre-restore backup included).",
+  "license": "Apache-2.0",
+  "author": "Adobe Inc.",
+  "keywords": [
+    "adobe-io",
+    "aio",
+    "app-builder",
+    "commerce-admin",
+    "snapshot",
+    "rollback"
+  ],
+  "main": "./src/index.js",
+  "exports": {
+    ".": "./src/index.js",
+    "./web": "./web/index.js"
+  },
+  "scripts": {
+    "build": "node ./scripts/build-web.js",
+    "prepublishOnly": "node ./scripts/build-web.js",
+    "postinstall": "node ./scripts/setup.js && node -e \"try{require('@adobedjangir/commerce-admin-management/scripts/discover').run()}catch(e){}\""
+  },
+  "files": [
+    "src",
+    "actions",
+    "web",
+    "scripts",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "esbuild": "^0.25.0"
+  },
+  "peerDependencies": {
+    "@adobedjangir/commerce-admin-management": ">=1.0.0",
+    "@adobedjangir/commerce-admin-get-config": ">=1.0.0"
+  },
+  "commerceAdmin": {
+    "register": "registerSnapshots"
+  }
+}

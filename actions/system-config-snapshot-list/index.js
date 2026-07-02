@@ -32,7 +32,12 @@ async function main (params) {
     if (!snapIndexEnsured) {
       try { await col.createIndex({ createdAt: -1 }); snapIndexEnsured = true } catch (_) { /* best-effort */ }
     }
-    const docs = await col.find({}).sort({ createdAt: -1 }).skip(skip).limit(limit).toArray().catch(() => [])
+    // Project OUT the heavy payloads (full schema + every value row) server-side
+    // so the list never transfers them — the list only needs metadata + counts.
+    // The app-side map below is kept as a fallback if the driver ignores the
+    // projection option.
+    const docs = await col.find({}, { projection: { schema: 0, values: 0 } })
+      .sort({ createdAt: -1 }).skip(skip).limit(limit).toArray().catch(() => [])
     // Strip large payloads from the list response.
     const items = docs.map((d) => ({
       _id: d._id,

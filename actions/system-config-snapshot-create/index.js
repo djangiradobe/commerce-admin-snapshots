@@ -99,12 +99,14 @@ async function main (params) {
     }
     await snapCol.insertOne(snapshot)
 
-    // Compact older snapshots — keep only the most recent SNAPSHOT_MAX.
+    // Compact older snapshots — keep only the most recent SNAPSHOT_MAX. Use
+    // estimatedDocumentCount (O(1) metadata) and project only _id when finding
+    // the ones to drop (snapshot docs are large — don't pull their payloads).
     try {
-      const total = await snapCol.countDocuments({})
+      const total = await (snapCol.estimatedDocumentCount ? snapCol.estimatedDocumentCount() : snapCol.countDocuments({}))
       if (total > SNAPSHOT_MAX) {
         const over = total - SNAPSHOT_MAX
-        const oldest = await snapCol.find({}).sort({ createdAt: 1 }).limit(over).toArray()
+        const oldest = await snapCol.find({}, { projection: { _id: 1 } }).sort({ createdAt: 1 }).limit(over).toArray()
         for (const o of oldest) await snapCol.deleteOne({ _id: o._id })
       }
     } catch (_) { /* compaction best-effort */ }

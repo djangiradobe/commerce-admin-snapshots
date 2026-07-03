@@ -23,7 +23,7 @@ value row) and restore them wholesale — with an automatic pre-restore backup.
 - A **pre-restore snapshot** is captured automatically first, so a restore is
   itself undoable.
 
-> **Create and restore are admin-only** when the
+> **Create, restore, and delete are admin-only** (delete supports single + multi-select) when the
 > [`ims-access`](https://www.npmjs.com/package/@adobedjangir/commerce-admin-ims-access)
 > RBAC add-on is installed (restore is destructive). Viewing history is open to
 > all roles. Without RBAC, create/restore are open.

@@ -6,6 +6,9 @@ actions:
     function: system-config-snapshot-create/index.js
     web: 'yes'
     runtime: 'nodejs:20'
+    limits:
+      concurrency: 200
+      memory: 256
     inputs:
       LOG_LEVEL: debug
       OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID
@@ -22,6 +25,9 @@ actions:
     function: system-config-snapshot-list/index.js
     web: 'yes'
     runtime: 'nodejs:20'
+    limits:
+      concurrency: 200
+      memory: 256
     inputs:
       LOG_LEVEL: debug
       OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID
@@ -38,6 +44,9 @@ actions:
     function: system-config-snapshot-restore/index.js
     web: 'yes'
     runtime: 'nodejs:20'
+    limits:
+      concurrency: 200
+      memory: 256
     inputs:
       LOG_LEVEL: debug
       SYSTEM_CONFIG_CRYPT_KEY: $SYSTEM_CONFIG_CRYPT_KEY
@@ -55,6 +64,9 @@ actions:
     function: system-config-snapshot-delete/index.js
     web: 'yes'
     runtime: 'nodejs:20'
+    limits:
+      concurrency: 200
+      memory: 256
     inputs:
       LOG_LEVEL: debug
       OAUTH_CLIENT_ID: $OAUTH_CLIENT_ID

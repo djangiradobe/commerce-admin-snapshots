@@ -1,8 +1,8 @@
-// web/src/index.js
+// web/src/index.tsx
 import { configureWeb } from "@adobedjangir/commerce-admin-management/web";
 
-// web/src/SnapshotHistory.js
-import React, { useCallback, useEffect, useState } from "react";
+// web/src/SnapshotHistory.tsx
+import { useCallback, useEffect, useState } from "react";
 import {
   View,
   Flex,
@@ -331,7 +331,7 @@ function SnapshotHistory({ runtime, ims }) {
   ] });
 }
 
-// web/src/index.js
+// web/src/index.tsx
 function registerSnapshots() {
   configureWeb({
     actionKeys: {

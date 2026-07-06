@@ -7,6 +7,6 @@ Licensed under the Apache License, Version 2.0
 // snapshot actions are self-contained. This file is the package's entry
 // point for completeness; consumers don't normally need to import from it.
 
-module.exports = {
-  SNAPSHOT_COLLECTION: 'system_config_snapshots'
-}
+const SNAPSHOT_COLLECTION = 'system_config_snapshots'
+
+export { SNAPSHOT_COLLECTION }

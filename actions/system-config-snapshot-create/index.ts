@@ -10,7 +10,7 @@ Licensed under the Apache License, Version 2.0
 
 const { Core } = require('@adobe/aio-sdk')
 const { errorResponse } = require('@adobedjangir/commerce-admin-management/actions/utils')
-const { getClient } = require('@adobedjangir/commerce-admin-management/abdb')
+const { getClient } = require('@adobedjangir/abdb')
 
 // Soft RBAC hook — creating snapshots is admin-only (literal require so
 // esbuild bundles it; see core system-config-save for the rationale).

@@ -14,7 +14,7 @@ Licensed under the Apache License, Version 2.0
 
 const { Core } = require('@adobe/aio-sdk')
 const { errorResponse, checkMissingRequestInputs } = require('@adobedjangir/commerce-admin-management/actions/utils')
-const { getClient } = require('@adobedjangir/commerce-admin-management/abdb')
+const { getClient } = require('@adobedjangir/abdb')
 const { toStateKey } = require('@adobedjangir/commerce-admin-management/shared')
 
 // Soft RBAC hook — restoring a snapshot is destructive → admin-only.
